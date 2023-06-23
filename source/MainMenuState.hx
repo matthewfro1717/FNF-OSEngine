@@ -17,6 +17,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import ColorblindFilters;
+import FreeplayState.vocals;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
