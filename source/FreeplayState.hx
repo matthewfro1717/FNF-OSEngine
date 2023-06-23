@@ -317,6 +317,9 @@ class FreeplayState extends MusicBeatState
 		}
 	}
 
+	var instPlaying:Int = -1;
+	public static var vocals:FlxSound = null;
+	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
@@ -370,6 +373,8 @@ class FreeplayState extends MusicBeatState
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
+		var space = FlxG.keys.justPressed.SPACE;
+		var ctrl = FlxG.keys.justPressed.CONTROL;
 
 		if (upP)
 		{
@@ -384,106 +389,150 @@ class FreeplayState extends MusicBeatState
 		if (controls.UI_RIGHT_P)
 			changeDiff(1);
 
+
 		if (controls.BACK)
 		{
-			FlxG.switchState(new FreeplayState());
+			persistentUpdate = false;
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if (accepted)
+		if(ctrl)
 		{
-			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
+			persistentUpdate = false;
+			openSubState(new GameplayChangersSubstate());
+		}
+		else if(space)
+		{
+			if(instPlaying != curSelected)
+			{
+				#if PRELOAD_ALL
+				destroyFreeplayVocals();
+				FlxG.sound.music.volume = 0;
+				Paths.currentModDirectory = songs[curSelected].folder;
+				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
+				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+				if (PlayState.SONG.needsVoices)
+					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+				else
+					vocals = new FlxSound();
 
+				FlxG.sound.list.add(vocals);
+				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
+				vocals.play();
+				vocals.persist = true;
+				vocals.looped = true;
+				vocals.volume = 0.7;
+				instPlaying = curSelected;
+				#end
+			}
+		}
+
+		else if (accepted)
+		{
+			persistentUpdate = false;
+			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
+			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+			/*#if MODS_ALLOWED
+			if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
+			#else
+			if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
+			#end
+				poop = songLowercase;
+				curDifficulty = 1;
+				trace('Couldnt find file');
+			}*/
 			trace(poop);
 
-			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
 
-			PlayState.storyWeek = songs[curSelected].week;
-			trace('CUR WEEK' + PlayState.storyWeek);
+			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
+			
+			if (FlxG.keys.pressed.SHIFT){
+				LoadingState.loadAndSwitchState(new ChartingState());
+			}else{
+				LoadingState.loadAndSwitchState(new PlayState());
+			}
+
+			FlxG.sound.music.volume = 0;
+					
+			destroyFreeplayVocals();
 		}
+		else if(controls.RESET)
+		{
+			persistentUpdate = false;
+			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
+			FlxG.sound.play(Paths.sound('scrollMenu'));
+		}
+		super.update(elapsed);
+	}
+
+	public static function destroyFreeplayVocals() {
+		if(vocals != null) {
+			vocals.stop();
+			vocals.destroy();
+		}
+		vocals = null;
 	}
 
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
-		{
+
 		if (curDifficulty < 0)
-			curDifficulty = 2;
-		if (curDifficulty > 2)
+			curDifficulty = CoolUtil.difficulties.length-1;
+		if (curDifficulty >= CoolUtil.difficulties.length)
 			curDifficulty = 0;
-		}
-		else
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 3;
-			if (curDifficulty > 3)
-				curDifficulty = 0;
-		}
-		if (songs[curSelected].week == 9)
-		{
-			curDifficulty = 1;
-		}
+
+		lastDifficultyName = CoolUtil.difficulties[curDifficulty];
+
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
 		#end
-		updateDifficultyText();
-		
+
+		PlayState.storyDifficulty = curDifficulty;
+		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+		positionHighscore();
 	}
 
-	function updateDifficultyText()
+	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		switch (songs[curSelected].week)
-		{
-			case 9:
-				diffText.text = 'FINALE' + " - " + curChar.toUpperCase();
-			default:
-				switch (curDifficulty)
-				{
-					case 0:
-						diffText.text = "EASY" + " - " + curChar.toUpperCase();
-					case 1:
-						diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
-					case 2:
-						diffText.text = "HARD" + " - " + curChar.toUpperCase();
-					case 3:
-						diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
-				}
-		}
-	}
+		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-	function changeSelection(change:Int = 0)
-	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		curSelected += change;
 
 		if (curSelected < 0)
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
-		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 2;
-			if (curDifficulty > 2)
-				curDifficulty = 0;
+			
+		var newColor:Int = songs[curSelected].color;
+		if(newColor != intendedColor) {
+			if(colorTween != null) {
+				colorTween.cancel();
+			}
+			intendedColor = newColor;
+			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
+				onComplete: function(twn:FlxTween) {
+					colorTween = null;
+				}
+			});
 		}
-		if (songs[curSelected].week == 9)
-		{
-			curDifficulty = 1;
-		}
-		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
-		updateDifficultyText();
+
 		// selector.y = (70 * curSelected) + 30;
+
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-
-		// lerpScore = 0;
-		#end
-
-		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
+		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
 		#end
 
 		var bullShit:Int = 0;
@@ -509,7 +558,58 @@ class FreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
-		FlxTween.color(bg, 0.1, bg.color, songColors[songs[curSelected].week]);
+		
+		Paths.currentModDirectory = songs[curSelected].folder;
+		PlayState.storyWeek = songs[curSelected].week;
+
+		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
+		var diffStr:String = WeekData.getCurrentWeek().difficulties;
+		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
+
+		if(diffStr != null && diffStr.length > 0)
+		{
+			var diffs:Array<String> = diffStr.split(',');
+			var i:Int = diffs.length - 1;
+			while (i > 0)
+			{
+				if(diffs[i] != null)
+				{
+					diffs[i] = diffs[i].trim();
+					if(diffs[i].length < 1) diffs.remove(diffs[i]);
+				}
+				--i;
+			}
+
+			if(diffs.length > 0 && diffs[0].length > 0)
+			{
+				CoolUtil.difficulties = diffs;
+			}
+		}
+		
+		if(CoolUtil.difficulties.contains(CoolUtil.defaultDifficulty))
+		{
+			curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
+		}
+		else
+		{
+			curDifficulty = 0;
+		}
+
+		var newPos:Int = CoolUtil.difficulties.indexOf(lastDifficultyName);
+		//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
+		if(newPos > -1)
+		{
+			curDifficulty = newPos;
+		}
+	}
+
+	private function positionHighscore() {
+		scoreText.x = FlxG.width - scoreText.width - 6;
+
+		scoreBG.scale.x = FlxG.width - scoreText.x + 6;
+		scoreBG.x = FlxG.width - (scoreBG.scale.x / 2);
+		diffText.x = Std.int(scoreBG.x + (scoreBG.width / 2));
+		diffText.x -= diffText.width / 2;
 	}
 }
 
@@ -518,11 +618,16 @@ class SongMetadata
 	public var songName:String = "";
 	public var week:Int = 0;
 	public var songCharacter:String = "";
+	public var color:Int = -7179779;
+	public var folder:String = "";
 
-	public function new(song:String, week:Int, songCharacter:String)
+	public function new(song:String, week:Int, songCharacter:String, color:Int)
 	{
 		this.songName = song;
 		this.week = week;
 		this.songCharacter = songCharacter;
+		this.color = color;
+		this.folder = Paths.currentModDirectory;
+		if(this.folder == null) this.folder = '';
 	}
 }
