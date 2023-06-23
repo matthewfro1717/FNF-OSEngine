@@ -127,9 +127,11 @@ class FreeplayState extends MusicBeatState
 
 	public function LoadProperPack()
 	{
+		switch (Catagories[CurrentPack].toLowerCase())
+		{
 				case 'main':
 					addWeek(['Gravo', 'Anticontrol'], 0, ['davo', 'davo']);
-				    addWeek(['Outrage'], 1, ['DavoCrazy']);
+				        addWeek(['Outrage'], 1, ['DavoCrazy']);
 					addWeek(['Watching Over', 'Dark Matters'], 2, ['bigbi', 'bigbi']);
 					addWeek(['Discremia'], 3, ['expungedbigbi']);
 					addWeek(['Ijolonian'], 4, ['dude']);
@@ -138,7 +140,7 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Cute Cat', 'Final Cuteness', 'Meow'], 7, ['jade', 'jade', 'jade']);
 					addWeek(['Jade Fan'], 8, ['jadefan']);
 					addWeek(['Addiction'], 6, ['d']);
-				    addWeek(['Refaction'], 9, ['sookie']);
+				        addWeek(['Refaction'], 9, ['sookie']);
 					addWeek(['Ddosing'], 10, ['unfair_bambi']);
 					addWeek(['Colloskipepapkophobia'], 11, ['scary']);
 					addWeek(['REAL THEARCHY'], 6, ['no']);
@@ -147,7 +149,7 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Jeffsanity'], 11, ['jeff']);
 					addWeek(['Artifact'], 11, ['jeff']);
 					addWeek(['Fuck You'], 12, ['bambitch']);
-                    addWeek(['Frickyouphobia'], 12, ['hell']);
+                                        addWeek(['Frickyouphobia'], 12, ['hell']);
 					addWeek(['Phonology'], 6, ['truehell']);
 					addWeek(['Death Finale'], 12, ['finalexpunged']);
 				case 'davo':
@@ -155,7 +157,7 @@ class FreeplayState extends MusicBeatState
 				case 'extras':
 					addWeek(['Spiralation'], 9, ['spibi']);
 					addWeek(['Playstore'], 13, ['banduplaystore']);
-                    addWeek(['Deathness'], 14, ['deezi']);
+                                        addWeek(['Deathness'], 14, ['deezi']);
 					addWeek(['Trueform'], 15, ['origin']);
 					addWeek(['Naive Dumbass'], 6, ['dumbassunga']);
 					addWeek(['Fren Dumbass'], 6, ['dumbassave']);
@@ -177,8 +179,8 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Deception'], 10, 0xFF000000, ['banxu']);
 				case 'old':
 					addWeek(['Old Gravo'], 0,  ['davo']);
-				    addWeek(['Old Spiralation'], 6, ['oldspibi']);
-				    addWeek(['Old Ddosing'], 10, ['unfair_bambi']);
+				        addWeek(['Old Spiralation'], 6, ['oldspibi']);
+				        addWeek(['Old Ddosing'], 10, ['unfair_bambi']);
 				case 'joke':
 					addWeek(['Fangirl'], 13, ['fangirl']);
 					addWeek(['Unreal Box'], 20, ['boxi']);
@@ -199,8 +201,9 @@ class FreeplayState extends MusicBeatState
 					addWeek(['confronting-yourself'], 22, 0xFFE0BE00, ['jasonbom']);
 					addWeek(['Final Meows'], 23, ['duo3']);
 					addWeek(['Ferocious'], 0, ['davo']);;
-	}
 
+		}
+	}
 
 	public function GoToActualFreeplay()
 	{
