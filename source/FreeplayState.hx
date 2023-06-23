@@ -41,6 +41,10 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 
+	var weekColor:FlxColor;
+        var weekNum:FlxText;
+	var songCharacters:Array<String>;
+	
 	var curCategory:FlxText;
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
