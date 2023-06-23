@@ -50,13 +50,23 @@ class MainMenuState extends MusicBeatState
 
 	#if MODS_ALLOWED
 	var customOption:String;
-	var	customOptionLink:String;
+	var customOptionLink:String;
 	#end
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	
+	public static var bgPaths:Array<String> = [
+		'mamakotomi',
+		'mantis',
+		'morie',
+		'Olyantwo',
+		'SUSSUS AMOGUS',
+		'SwagnotrllyTheMod',
+		'T5mpler'
+	];
 
 	override function create()
 	{
@@ -88,14 +98,14 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-        var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-        bg.scrollFactor.set(0, yScroll);
-        bg.setGraphicSize(Std.int(bg.width * 1.175));
-        bg.updateHitbox();
-        bg.screenCenter();
-        bg.antialiasing = ClientPrefs.globalAntialiasing;
-        add(bg);
-
+        var bg = new FlxSprite(-80).loadGraphic(randomizeBG());
+	bg.scrollFactor.set();
+	bg.setGraphicSize(Std.int(bg.width * 1.1));
+	bg.updateHitbox();
+	bg.screenCenter();
+	bg.antialiasing = true;
+	bg.color = 0xFFFDE871;
+	add(bg);
         if(ClientPrefs.themedmainmenubg == true) {
 
             var themedBg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
@@ -376,7 +386,6 @@ class MainMenuState extends MusicBeatState
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
-
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
@@ -397,5 +406,19 @@ class MainMenuState extends MusicBeatState
 				//spr.centerOffsets();
 			}
 		});
+	}
+
+	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
+	{
+		var date = Date.now();
+		var chance:Int = FlxG.random.int(0, bgPaths.length - 1);
+		if(date.getMonth() == 3 && date.getDate() == 1)
+		{
+			return Paths.image('backgrounds/ramzgaming');
+		}
+		else
+		{
+			return Paths.image('backgrounds/${bgPaths[chance]}');
+		}
 	}
 }
