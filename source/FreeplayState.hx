@@ -175,8 +175,8 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Queeve'], 12, ['quabam']);
 					addWeek(['Thefurry'], 6, ['TearchyBuddy']);
 					addWeek(['Glossed'], 12, ['beebi']);
-					addWeek(['Friendship'], 19, 0xFFE07000, ['cavo']);
-					addWeek(['Deception'], 10, 0xFF000000, ['banxu']);
+					addWeek(['Friendship'], 19, ['cavo']);
+					addWeek(['Deception'], 10, ['banxu']);
 				case 'old':
 					addWeek(['Old Gravo'], 0,  ['davo']);
 				        addWeek(['Old Spiralation'], 6, ['oldspibi']);
@@ -184,7 +184,7 @@ class FreeplayState extends MusicBeatState
 				case 'joke':
 					addWeek(['Fangirl'], 13, ['fangirl']);
 					addWeek(['Unreal Box'], 20, ['boxi']);
-					addWeek(['Bambi Is Dead'], 13, 0xFF43E000, ['bambi']);
+					addWeek(['Bambi Is Dead'], 13, ['bambi']);
 					addWeek(['Meme God'], 12, ['carl']);
 					addWeek(['Vs Pandi Easter'], 6, ['pandi']);
 					addWeek(['Justin Deez Nuts'], 21, ['justin']);
