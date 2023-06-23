@@ -302,7 +302,7 @@ class FreeplayState extends MusicBeatState
 		var num:Int = 0;
 		for (song in songs)
 		{
-			addSong(song, weekNum, songCharacters[num], color:Int);
+			addSong(song, weekNum, songCharacters[num], weekColor);
 			if (songCharacters.length != 1)
 				num++;
 		}
