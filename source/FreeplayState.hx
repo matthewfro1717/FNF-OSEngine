@@ -198,9 +198,9 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Devcore'], 6, ['seal']);
 					addWeek(['Zanta'], 2, ['bigbi']);
 					addWeek(['De Trouble'], 10, ['unfair_bambi']);
-					addWeek(['confronting-yourself'], 22, 0xFFE0BE00, ['jasonbom']);
+					addWeek(['confronting-yourself'], 22, ['jasonbom']);
 					addWeek(['Final Meows'], 23, ['duo3']);
-					addWeek(['Ferocious'], 0, ['davo']);;
+					addWeek(['Ferocious'], 0, ['davo']);
 
 		}
 	}
