@@ -69,7 +69,7 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Lost Data'], 0, ['davo']);
 				case 'davo':
 					addWeek(['Intensity', 'ChallengeDavo', 'Pixelated'], 1, ['DavoCrazy', 'DDavo', 'pix']);
-			        case 'extras'
+			        case 'extras':
 					addWeek(['Spiralation'], 0, ['spibi']);
 					addWeek(['Playstore'], 0, ['banduplaystore']);
 					addWeek(['Deathness'], 0, ['unfair']);
