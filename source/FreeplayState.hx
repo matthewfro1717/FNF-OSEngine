@@ -41,7 +41,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ['main', 'davo', 'extras', 'old', 'joke', 'purgatory', 'covers'];
+	private var Catagories:Array<String> = ['dave', 'joke', 'extras', 'dave2.5', 'classic', 'cover', 'fanmade', 'finale'];
 
 	private var CurrentPack:Int = 0;
 
@@ -97,8 +97,6 @@ class FreeplayState extends MusicBeatState
 		#if debug
 		isDebug = true;
 		#end
-
-
 
 		// LOAD MUSIC
 
@@ -369,8 +367,8 @@ class FreeplayState extends MusicBeatState
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
-		var upP = controls.UP_P;
-		var downP = controls.DOWN_P;
+		var upP = controls.UI_UP_P;
+		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
 
 		if (upP)
@@ -381,9 +379,9 @@ class FreeplayState extends MusicBeatState
 		{
 			changeSelection(1);
 		}
-		if (controls.LEFT_P)
+		if (controls.UI_LEFT_P)
 			changeDiff(-1);
-		if (controls.RIGHT_P)
+		if (controls.UI_RIGHT_P)
 			changeDiff(1);
 
 		if (controls.BACK)
@@ -431,7 +429,6 @@ class FreeplayState extends MusicBeatState
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 		#end
-		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
 		updateDifficultyText();
 		
 	}
