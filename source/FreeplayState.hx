@@ -41,18 +41,81 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 
+	var curCategory:FlxText;
+
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
 	private var iconArray:Array<HealthIcon> = [];
 
 	var bg:FlxSprite;
-	var intendedColor:Int;
+	public static var intendedColor:Int;
 	var colorTween:FlxTween;
 
 	override function create()
 	{
-		//Paths.clearStoredMemory();
+		switch (FreeplaySelectState.freeplayCats[FreeplaySelectState.curCategory].toLowerCase())
+			{
+				case 'main':
+					addWeek(['Gravo', 'Anticontrol', 'Outrage'], 0, ['davo', 'davo', 'DavoCrazy']);
+					addWeek(['Watching Over', 'Dark Matters', 'Discremia'], 0, ['bigbi', 'bigbi', 'expungedbigbi']);
+					addWeek(['Ijolonian'], 0, ['dude']);
+					addWeek(['GLitched'], 0, ['expungeddavo']);
+					addWeek(['squish', 'uncute'], 0, ['seal', 'sealmad']);
+					addWeek(['Cute Cat', 'Final Cuteness', 'Meow', 'Jade Fan', 'Addiction', 'Refaction'], 0, ['jade', 'jade', 'jade', 'jadefan', 'd', 'sookie']);
+					addWeek(['Ddosing', 'Colloskipepapkophobia', 'REAL THEARCHY', 'Impossibleness'], 0, ['unfair_bambi', 'scary', 'no', 'yourmom']);
+					addWeek(['Cursebreaker', 'Jeffsanity', 'Artifact', 'Fuck You', 'Frickyouphobia', 'Phonology'], 0, ['pandi', 'jeff', 'jeff', 'bambitch', 'hell', 'truehell']);
+					addWeek(['Death Finale'], 0, ['finalexpunged']);
+					addWeek(['Lost Data'], 0, ['davo']);
+				case 'davo':
+					addWeek(['Intensity', 'ChallengeDavo', 'Pixelated'], 1, ['DavoCrazy', 'DDavo', 'pix']);
+			        case 'extras':
+					addWeek(['Spiralation'], 0, ['spibi']);
+					addWeek(['Playstore'], 0, ['banduplaystore']);
+					addWeek(['Deathness'], 0, ['unfair']);
+					addWeek(['Trueform'], 0, ['origin']);
+					addWeek(['Naive Dumbass'], 0, ['dumbassunga']);
+					addWeek(['Fren Dumbass'], 0, ['dumbassave']);
+					addWeek(['Limbless'], 0, ['dal']);
+					addWeek(['Reference'], 0, ['duo']);
+					addWeek(['Shut Up!'], 0, ['rednessi']);
+					addWeek(['Unsaved'], 0, ['unrecovered_save']);
+					addWeek(['Sense Of Humor'], 0, ['dumbo']);
+					addWeek(['Smallest'], 0, ['smoli']);
+					addWeek(['Retrieved'], 0, ['bavbi']);
+					addWeek(['Underwater'], 0, ['axobi']);
+					addWeek(['Road Rage'], 0, ['carbi']);
+					addWeek(['Sacrafice'], 0, ['bam']);
+					addWeek(['Queeve'], 0, ['quabam']);
+					addWeek(['Thefurry'], 0, ['TearchyBuddy']);
+					addWeek(['Glossed'], 0, ['beebi']);
+					addWeek(['Friendship'], 0, ['cavo']);
+					addWeek(['Deception'], 0, ['banxu']);
+				case 'old':
+					addWeek(['Old Gravo', 'Old Spiralation', 'Old Ddosing'], 1, ['dave', 'oldspibi', 'unfair_bambi']);
+				case 'joke':
+					addWeek(['Fangirl'], 0, ['fangirl']);
+					addWeek(['Unreal Box'], 0, ['boxi']);
+					addWeek(['Bambi Is Dead'], 0, ['bambi']);
+					addWeek(['Meme God'], 0, ['carl']);
+					addWeek(['Vs Pandi Easter'], 0, ['pandi']);
+					addWeek(['Justin Deez Nuts'], 0, ['justin']);
+				case 'purgatory':
+					addWeek(['Go Down For Candy'], 1, ['none']);
+				case 'covers':
+					addWeek(['Strawberry'], 0, ['disruption']);
+					addWeek(['Thunderstorm'], 0, ['thunder']);
+					addWeek(['Go Jade Go!'], 0, ['jade']);
+					addWeek(['Onslaught'], 0, ['bigbi']);
+					addWeek(['Devcore'], 0, ['seal']);
+					addWeek(['Zanta'], 0, ['bigbi']);
+					addWeek(['De Trouble'], 0, ['unfair_bambi']);
+					addWeek(['confronting-yourself'], 0, ['jasonbom']);
+					addWeek(['Final Meows'], 0, ['duo3']);
+					addWeek(['Ferocious'], 0, ['davo']);
+			};
+
+		Paths.clearStoredMemory();
 		//Paths.clearUnusedMemory();
 		
 		persistentUpdate = true;
@@ -85,13 +148,12 @@ class FreeplayState extends MusicBeatState
 				{
 					colors = [146, 113, 253];
 				}
-				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
+				//addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 			}
 		}
 		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
-
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 		for (i in 0...initSonglist.length)
 		{
@@ -113,7 +175,7 @@ class FreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItem = true;
-			songText.targetY = i;
+			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
 
 			if (songText.width > 980)
@@ -156,6 +218,10 @@ class FreeplayState extends MusicBeatState
 
 		add(scoreText);
 
+		curCategory = new FlxText(0, scoreText.y, 0, FreeplaySelectState.freeplayCats[FreeplaySelectState.curCategory], 32);
+		curCategory.font = scoreText.font;
+		curCategory.screenCenter(X);
+
 		if(curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
 		intendedColor = bg.color;
@@ -174,17 +240,13 @@ class FreeplayState extends MusicBeatState
 		// JUST DOIN THIS SHIT FOR TESTING!!!
 		/* 
 			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
-
 			var texFel:TextField = new TextField();
 			texFel.width = FlxG.width;
 			texFel.height = FlxG.height;
 			// texFel.
 			texFel.htmlText = md;
-
 			FlxG.stage.addChild(texFel);
-
 			// scoreText.textField.htmlText = md;
-
 			trace(md);
 		 */
 
@@ -193,10 +255,10 @@ class FreeplayState extends MusicBeatState
 		add(textBG);
 
 		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press SPACE to listen to the Song / Press RESET to Reset your Score and Accuracy.";
 		var size:Int = 16;
 		#else
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press RESET to Reset your Score and Accuracy.";
 		var size:Int = 18;
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
@@ -212,6 +274,17 @@ class FreeplayState extends MusicBeatState
 		super.closeSubState();
 	}
 
+	/*public function LoadProperPack() // scrapped function
+	{
+		switch (FreeplaySelectState.freeplayCats[FreeplaySelectState.curCategory].toLowerCase())
+			{
+				case 'templatecat':
+					addWeek(['Tutorial'], 0, 0xFFce3c80, ['gf']);
+				case 'templatecattwo':
+					addWeek(['Bopeebo', 'Fresh', 'Dad-battle'], 1, 0xFF00dcff, ['dad', 'dad', 'dad']);
+			}
+	}*/
+
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
 		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
@@ -222,21 +295,18 @@ class FreeplayState extends MusicBeatState
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
 	}
 
-	/*public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
+	public function addWeek(songs:Array<String>, weekNum:Int, weekColor:Int, ?songCharacters:Array<String>)
 	{
 		if (songCharacters == null)
 			songCharacters = ['bf'];
-
 		var num:Int = 0;
 		for (song in songs)
 		{
-			addSong(song, weekNum, songCharacters[num]);
-			this.songs[this.songs.length-1].color = weekColor;
-
+			addSong(song, weekNum, songCharacters[num], weekColor);
 			if (songCharacters.length != 1)
 				num++;
 		}
-	}*/
+	}
 
 	var instPlaying:Int = -1;
 	public static var vocals:FlxSound = null;
@@ -302,13 +372,6 @@ class FreeplayState extends MusicBeatState
 					changeDiff();
 				}
 			}
-
-			if(FlxG.mouse.wheel != 0)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'), 0.2);
-				changeSelection(-shiftMult * FlxG.mouse.wheel, false);
-				changeDiff();
-			}
 		}
 
 		if (controls.UI_LEFT_P)
@@ -324,15 +387,10 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new FreeplaySelectState());
 		}
-
-		if(ctrl)
-		{
-			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
-		}
-		else if(space)
+		
+		if(space)
 		{
 			if(instPlaying != curSelected)
 			{
@@ -386,6 +444,7 @@ class FreeplayState extends MusicBeatState
 			if (FlxG.keys.pressed.SHIFT){
 				LoadingState.loadAndSwitchState(new ChartingState());
 			}else{
+			//	LoadingState.loadAndSwitchState(new CharSelectState()); //just tryna fix a bunch of shit
 				LoadingState.loadAndSwitchState(new PlayState());
 			}
 
