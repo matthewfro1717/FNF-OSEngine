@@ -68,9 +68,9 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Jade Fan'], 0, 0xFFAF7C64, ['jadefan']);
 					addWeek(['Addiction'], 0, 0xFFFFFFFF, ['d']);
 				        addWeek(['Refaction'], 0, 0xFF4939615, ['sookie']);
-					addWeek(['Ddosing'], 0, 0xFF000000, ['unfair_bambi'])
-					addWeek(['Colloskipepapkophobia'], 0, 0xFF505050, ['scary'])
-					addWeek(['REAL THEARCHY'], 0, 0xFFFFFFFF, ['no'])
+					addWeek(['Ddosing'], 0, 0xFF000000, ['unfair_bambi']);
+					addWeek(['Colloskipepapkophobia'], 0, 0xFF505050, ['scary']);
+					addWeek(['REAL THEARCHY'], 0, 0xFFFFFFFF, ['no']);
 					addWeek(['Impossibleness'], 0, 0xFF000000, ['yourmom']);
 					addWeek(['Cursebreaker'], 0, ['pandi']);
 					addWeek(['Jeffsanity'], 0, ['jeff']);
