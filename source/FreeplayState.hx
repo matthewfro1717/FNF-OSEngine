@@ -165,7 +165,7 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Reference'], 17, ['duo']);
 					addWeek(['Shut Up!'], 12, ['rednessi']);
 					addWeek(['Unsaved'], 18, ['unrecovered_save']);
-					addWeek(['Sense Of Humor'], 12,, ['dumbo']);
+					addWeek(['Sense Of Humor'], 12, ['dumbo']);
 					addWeek(['Smallest'], 16, ['smoli']);
 					addWeek(['Retrieved'], 10, ['bavbi']);
 					addWeek(['Underwater'], 16, ['axobi']);
