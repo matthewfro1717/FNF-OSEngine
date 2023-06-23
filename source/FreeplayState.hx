@@ -41,8 +41,8 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ['main', 'davo', 'extras', 'old', 'joke', 'purgatory', 'covers
-	private var Catagories:Array<String> = ['dave', 'joke', 'extras', 'dave2.5', 'classic', 'cover', 'fanmade', 'finale'];
+	private var AllPossibleSongs:Array<String> = ['main', 'davo', 'extras', 'old', 'joke', 'purgatory', 'covers'];
+	private var Catagories:Array<String> = ['main', 'davo', 'extras', 'old', 'joke', 'purgatory', 'covers'];
 
 	private var CurrentPack:Int = 0;
 
