@@ -58,7 +58,7 @@ class FreeplayState extends MusicBeatState
         0xFFFFFFFF, // SEAL = 5
         0xFFAF3700, // JADE = 6
 	0xFFAF7C64, // JADE FAN = 7
-	0xFF4939615, // SOOKIE = 8
+	0xFF493415, // SOOKIE = 8
         0xFF000000, //UNFAIR BAMBI = 9
         0xFF505050, //SCARY = 10
         0xFF000000, //YOUR MOM = 11
