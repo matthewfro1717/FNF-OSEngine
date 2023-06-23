@@ -50,30 +50,30 @@ class FreeplayState extends MusicBeatState
 	var loadingPack:Bool = false;
 
 	var songColors:Array<FlxColor> = [
-        0xFF00FF00, // DAVO = 0
-        0xFFAFD700, // DAVO MAD = 1
-        0xFFFF5800, // BIGBI = 2
-        0xFFFF0000, // EXPUNGED BIGBI = 3
-        0xFFFF8500, // EXPUNGED DAVO AND EXPUNGED BIGBI = 4
-        0xFFFFFFFF, // SEAL = 5
-        0xFFAF3700, // JADE = 6
-	0xFFAF7C64, // JADE FAN = 7
-	0xFF493415, // SOOKIE = 8
-        0xFF000000, //UNFAIR BAMBI = 9
-        0xFF505050, //SCARY = 10
-        0xFF000000, //YOUR MOM = 11
-        0xFFE00000, //BAMBITCH = 12
-        0xFF43E000, //BANDU PLAY STORE = 13
-        0xFF0021E0, //DEEZI = 14
-        0xFFFFF33B, //ORIGIN = 15
-        0xFF0021E0, //DAL = 16
-        0xFFA0E000, //THE DUO 1 = 17
-        0xFF43E000, //UNRECOVERED SAVE = 18
-        0xFFE07000, //CAVO = 19
-        0xFF707070, //BOXI = 20
-        0xFFE0BE00, //JUSTIN = 21
-        0xFFE0BE00, //JASONBOM = 22
-        0xFFAF3700 //THE DUO 2 = 23
+        0xFF00FF00, // DAVO
+        0xFFAFD700, // DAVO MAD
+        0xFFFF5800, // BIGBI
+        0xFFFF0000, // EXPUNGED BIGBI
+        0xFFFF8500, // EXPUNGED DAVO AND EXPUNGED BIGBI
+        0xFFFFFFFF, // SEAL
+        0xFFAF3700, // JADE
+	0xFFAF7C64, // JADE FAN
+	0xFF493415, // SOOKIE
+        0xFF000000, //UNFAIR BAMBI
+        0xFF505050, //SCARY
+        0xFF000000, //YOUR MOM
+        0xFFE00000, //BAMBITCH
+        0xFF43E000, //BANDU PLAY STORE
+        0xFF0021E0, //DEEZI
+        0xFFFFF33B, //ORIGIN
+        0xFF0021E0, //DAL
+        0xFFA0E000, //THE DUO 1
+        0xFF43E000, //UNRECOVERED SAVE
+        0xFFE07000, //CAVO
+        0xFF707070, //BOXI
+        0xFFE0BE00, //JUSTIN
+        0xFFE0BE00, //JASONBOM
+        0xFFAF3700 //THE DUO 2
     ];
 
 	private var iconArray:Array<HealthIcon> = [];
