@@ -57,62 +57,78 @@ class FreeplayState extends MusicBeatState
 		switch (FreeplaySelectState.freeplayCats[FreeplaySelectState.curCategory].toLowerCase())
 			{
 				case 'main':
-					addWeek(['Gravo', 'Anticontrol', 'Outrage'], 0, ['davo', 'davo', 'DavoCrazy']);
-					addWeek(['Watching Over', 'Dark Matters', 'Discremia'], 0, ['bigbi', 'bigbi', 'expungedbigbi']);
-					addWeek(['Ijolonian'], 0, ['dude']);
-					addWeek(['GLitched'], 0, ['expungeddavo']);
-					addWeek(['squish', 'uncute'], 0, ['seal', 'sealmad']);
-					addWeek(['Cute Cat', 'Final Cuteness', 'Meow', 'Jade Fan', 'Addiction', 'Refaction'], 0, ['jade', 'jade', 'jade', 'jadefan', 'd', 'sookie']);
-					addWeek(['Ddosing', 'Colloskipepapkophobia', 'REAL THEARCHY', 'Impossibleness'], 0, ['unfair_bambi', 'scary', 'no', 'yourmom']);
-					addWeek(['Cursebreaker', 'Jeffsanity', 'Artifact', 'Fuck You', 'Frickyouphobia', 'Phonology'], 0, ['pandi', 'jeff', 'jeff', 'bambitch', 'hell', 'truehell']);
+					addWeek(['Gravo', 'Anticontrol'], 0, 0xFF00FF00, ['davo', 'davo']);
+				        addWeek(['Outrage'], 0, 0xFFAFD700, ['DavoCrazy']);
+					addWeek(['Watching Over', 'Dark Matters'], 0, 0xFFFF5800, ['bigbi', 'bigbi']);
+					addWeek(['Discremia'], 0, 0xFFFF0000, ['expungedbigbi']);
+					addWeek(['Ijolonian'], 0, 0xFFFF8500, ['dude']);
+					addWeek(['GLitched'], 0, 0xFFAFAF00, ['expungeddavo']);
+					addWeek(['squish', 'uncute'], 0, 0xFFFFFFFF, ['seal', 'sealmad']);
+					addWeek(['Cute Cat', 'Final Cuteness', 'Meow'], 0, 0xFFAF3700, ['jade', 'jade', 'jade']);
+					addWeek(['Jade Fan'], 0, 0xFFAF7C64, ['jadefan']);
+					addWeek(['Addiction'], 0, 0xFFFFFFFF, ['d']);
+				        addWeek(['Refaction'], 0, 0xFF4939615, ['sookie']);
+					addWeek(['Ddosing'], 0, 0xFF000000, ['unfair_bambi'])
+					addWeek(['Colloskipepapkophobia'], 0, 0xFF505050, ['scary'])
+					addWeek(['REAL THEARCHY'], 0, 0xFFFFFFFF, ['no'])
+					addWeek(['Impossibleness'], 0, 0xFF000000, ['yourmom']);
+					addWeek(['Cursebreaker'], 0, ['pandi']);
+					addWeek(['Jeffsanity'], 0, ['jeff']);
+					addWeek(['Artifact'], 0, ['jeff']);
+					addWeek(['Fuck You'], 0, ['bambitch']);
+					addWeek(['Frickyouphobia'], 0, ['hell']);
+					addWeek(['Phonology'], 0, ['truehell']);
 					addWeek(['Death Finale'], 0, ['finalexpunged']);
 					addWeek(['Lost Data'], 0, ['davo']);
 				case 'davo':
-					addWeek(['Intensity', 'ChallengeDavo', 'Pixelated'], 1, ['DavoCrazy', 'DDavo', 'pix']);
+					addWeek(['Intensity', 'ChallengeDavo', 'Pixelated'], 0, 0xFF00FF00, ['DavoCrazy', 'DDavo', 'pix']);
 			        case 'extras':
-					addWeek(['Spiralation'], 0, ['spibi']);
-					addWeek(['Playstore'], 0, ['banduplaystore']);
-					addWeek(['Deathness'], 0, ['unfair']);
-					addWeek(['Trueform'], 0, ['origin']);
-					addWeek(['Naive Dumbass'], 0, ['dumbassunga']);
-					addWeek(['Fren Dumbass'], 0, ['dumbassave']);
-					addWeek(['Limbless'], 0, ['dal']);
-					addWeek(['Reference'], 0, ['duo']);
-					addWeek(['Shut Up!'], 0, ['rednessi']);
-					addWeek(['Unsaved'], 0, ['unrecovered_save']);
-					addWeek(['Sense Of Humor'], 0, ['dumbo']);
-					addWeek(['Smallest'], 0, ['smoli']);
-					addWeek(['Retrieved'], 0, ['bavbi']);
-					addWeek(['Underwater'], 0, ['axobi']);
-					addWeek(['Road Rage'], 0, ['carbi']);
-					addWeek(['Sacrafice'], 0, ['bam']);
-					addWeek(['Queeve'], 0, ['quabam']);
-					addWeek(['Thefurry'], 0, ['TearchyBuddy']);
-					addWeek(['Glossed'], 0, ['beebi']);
-					addWeek(['Friendship'], 0, ['cavo']);
-					addWeek(['Deception'], 0, ['banxu']);
+					addWeek(['Spiralation'], 0, 0xFF000000, ['spibi']);
+					addWeek(['Playstore'], 0, 0xFF43E000, ['banduplaystore']);
+					addWeek(['Deathness'], 0, 0xFF0021E0, ['unfair']);
+					addWeek(['Trueform'], 0, 0xFFFFF33B ['origin']);
+					addWeek(['Naive Dumbass'], 0, 0xFFFFFFFF, ['dumbassunga']);
+					addWeek(['Fren Dumbass'], 0, 0xFFFFFFFF, ['dumbassave']);
+					addWeek(['Limbless'], 0, 0xFF0021E0, ['dal']);
+					addWeek(['Reference'], 0, 0xFFA0E000, ['duo']);
+					addWeek(['Shut Up!'], 0, 0xFFE00000, ['rednessi']);
+					addWeek(['Unsaved'], 0, 0xFF43E000, ['unrecovered_save']);
+					addWeek(['Sense Of Humor'], 0, 0xFFE00000, ['dumbo']);
+					addWeek(['Smallest'], 0, 0xFF0021E0, ['smoli']);
+					addWeek(['Retrieved'], 0, 0xFF000000, ['bavbi']);
+					addWeek(['Underwater'], 0, 0xFF0021E0, ['axobi']);
+					addWeek(['Road Rage'], 0, 0xFFE0BE00 ['carbi']);
+					addWeek(['Bouncy Balls'], 0, 0xFF43E000, ['candi']);
+					addWeek(['Sacrafice'], 0, 0xFF43E000, ['bam']);
+					addWeek(['Queeve'], 0, 0xFFE00000 ['quabam']);
+					addWeek(['Thefurry'], 0, 0xFFFFFFFF, ['TearchyBuddy']);
+					addWeek(['Glossed'], 0, 0xFFE00000 ['beebi']);
+					addWeek(['Friendship'], 0, 0xFFE07000, ['cavo']);
+					addWeek(['Deception'], 0, 0xFF000000, ['banxu']);
 				case 'old':
-					addWeek(['Old Gravo', 'Old Spiralation', 'Old Ddosing'], 1, ['dave', 'oldspibi', 'unfair_bambi']);
+					addWeek(['Old Gravo'], 0, 0xFF00FF00,  ['davo']);
+				        addWeek(['Old Spiralation'], 0, 0xFFFFFFFF, ['oldspibi']);
+				        addWeek(['Old Ddosing'], 0, 0xFF000000, ['unfair_bambi']);
 				case 'joke':
-					addWeek(['Fangirl'], 0, ['fangirl']);
-					addWeek(['Unreal Box'], 0, ['boxi']);
-					addWeek(['Bambi Is Dead'], 0, ['bambi']);
-					addWeek(['Meme God'], 0, ['carl']);
-					addWeek(['Vs Pandi Easter'], 0, ['pandi']);
-					addWeek(['Justin Deez Nuts'], 0, ['justin']);
+					addWeek(['Fangirl'], 0, 0xFF43E000, ['fangirl']);
+					addWeek(['Unreal Box'], 0, 0xFF707070, ['boxi']);
+					addWeek(['Bambi Is Dead'], 0, 0xFF43E000, ['bambi']);
+					addWeek(['Meme God'], 0, 0xFFE00000, ['carl']);
+					addWeek(['Vs Pandi Easter'], 0, 0xFFFFFFFF, ['pandi']);
+					addWeek(['Justin Deez Nuts'], 0, 0xFFE0BE00, ['justin']);
 				case 'purgatory':
-					addWeek(['Go Down For Candy'], 1, ['none']);
+					addWeek(['Go Down For Candy'], 0, 0xFFFFFFFF, ['none']);
 				case 'covers':
-					addWeek(['Strawberry'], 0, ['disruption']);
-					addWeek(['Thunderstorm'], 0, ['thunder']);
-					addWeek(['Go Jade Go!'], 0, ['jade']);
-					addWeek(['Onslaught'], 0, ['bigbi']);
-					addWeek(['Devcore'], 0, ['seal']);
-					addWeek(['Zanta'], 0, ['bigbi']);
-					addWeek(['De Trouble'], 0, ['unfair_bambi']);
-					addWeek(['confronting-yourself'], 0, ['jasonbom']);
-					addWeek(['Final Meows'], 0, ['duo3']);
-					addWeek(['Ferocious'], 0, ['davo']);
+					addWeek(['Strawberry'], 0, 0xFF43E000, ['disruption']);
+					addWeek(['Thunderstorm'], 0, 0xFFAF3700, ['thunder']);
+					addWeek(['Go Jade Go!'], 0, 0xFFAF3700, ['jade']);
+					addWeek(['Onslaught'], 0, 0xFFFF5800, ['bigbi']);
+					addWeek(['Devcore'], 0, 0xFFFFFFFF, ['seal']);
+					addWeek(['Zanta'], 0, 0xFFFF5800, ['bigbi']);
+					addWeek(['De Trouble'], 0, 0xFF000000, ['unfair_bambi']);
+					addWeek(['confronting-yourself'], 0, 0xFFE0BE00, ['jasonbom']);
+					addWeek(['Final Meows'], 0, 0xFFAF3700, ['duo3']);
+					addWeek(['Ferocious'], 0, 0xFF00FF00, ['davo']);
 			};
 
 		Paths.clearStoredMemory();
